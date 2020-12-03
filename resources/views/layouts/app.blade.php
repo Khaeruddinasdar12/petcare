@@ -13,7 +13,7 @@
   <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet">
   <!-- Scripts -->
   
-
+  @yield('css')
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -79,16 +79,16 @@
             <!-- Authentication Links -->
             @guest
             <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="{{route('index')}}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Blog</a>
+              <a class="nav-link" href="{{ route('blog') }}">Blog</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">Tanya Dokter</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">About</a>
+              <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -101,7 +101,7 @@
             @else
             @if($guard == 'admin')
             <li class="nav-item">
-              <a class="nav-link" href="">Dashboard</a>
+              <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
             </li>
             <li class="nav-item dropdown">
               <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -113,7 +113,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Manage Dokter</a>
+              <a class="nav-link" href="{{route('dokter.index')}}">Manage Dokter</a>
             </li>
             <li class="nav-item dropdown">
               <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -169,7 +169,7 @@
     </div>
   </nav>
 
-  <main class="py-4">
+  <main class="py-4 bg-white">
     @yield('content')
   </main>
 </div>

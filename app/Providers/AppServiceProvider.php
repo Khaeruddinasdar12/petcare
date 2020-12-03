@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
+        Schema::defaultStringLength(191);
         $guard = '';
         if ($request->is('admin/*') || $request->is('admin')) {
             $guard = 'admin';

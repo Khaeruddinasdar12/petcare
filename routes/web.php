@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
-
+Route::get('/', 'UnAuth@index')->name('index');
+Route::get('/about', 'UnAuth@about')->name('about');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/blog', 'UnAuth@blog')->name('blog');
 Route::get('/chat', 'ChatController@index');
-Route::get('/blog/{slug}', 'BlogController@blog');
+Route::get('/blog/{slug}', 'BlogController@blog')->name('blog.detail');
 
 
 //RUTE ADMIN 
@@ -32,6 +32,9 @@ Route::post('admin/logout', 'Auth\AdminAuthController@postLogout')->name('admin.
 Route::prefix('admin')->namespace('Admin')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 	Route::resource('/blog', 'ManageBlog');
+
+	// manage dokter
+	Route::get('manage-dokter', 'ManageDokter@index')->name('dokter.index');
 
 });
 //END RUTE ADMIN

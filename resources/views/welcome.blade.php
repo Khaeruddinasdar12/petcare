@@ -1,14 +1,24 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/blog.css') }}" rel="stylesheet">
+<style type="text/css">
+  a.custom-card,
+  a.custom-card:hover {
+    color: inherit;
+  }
+</style>
+@endsection
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12">
      <div class="jumbotron">
       <h1 class="display-4">Hello!</h1>
-      <p class="lead">Pet Care Solution hadir sebagai solusi bagi kesehatan hewan peliharaan Anda, kami menyediakan berbagai peralatan, bahan dan tips-tips seputar kesehatan hewan.</p>
+      <p class="lead"><em>MyPets</em> adalah salah satu startup yang bergerak dibidang kesehatan hewan yang tujuannya memudahkan masyarakat untuk menemukan klinik hewan terdekat sesuai dengan lokasi tempat tinggalnya serta memudahkan juga dalam berkonsultasi langsung dengan dokter hewan.</p>
+      <p><em>MyPets</em> hadir sebagai solusi bagi kesehatan hewan peliharaan Anda, kami menyediakan berbagai peralatan, bahan dan tips-tips seputar kesehatan hewan.</p>
       <hr class="my-4">
-      <p>Kunjungi terus dan ikuti perkembangan informasi dari Pet Care Solution. Tanya Dokter dan dapatkan informasi khusus seputar hewan peliharaan.</p>
+      <p>Kunjungi terus dan ikuti perkembangan informasi dari <em>MyPets</em>. Tanya Dokter dan dapatkan informasi khusus seputar hewan peliharaan.</p>
       <a class="btn btn-primary btn-lg" href="#" role="button">Chat dokter</a>
     </div>
   </div>
@@ -41,36 +51,24 @@
   <p class="lead">Dapatkan informasi seputar kesehatan hewan dan cara pemeliharaan hewan yang baik dan benar.</p>
 </div>
 <div class="card-deck">
-  <div class="card">
-    <img src="{{asset('picture.png')}}" alt="..." class="rounded-circle">
-    <div class="card-body">
-      <h5 class="card-title">Artikel & Tips</h5>
-      <p class="card-text">Dapatkan informasi seputar kesehatan hewan dan cara pemeliharaan hewan yang baik dan benar.</p>
+  @foreach($data as $datas)
+  
+    <div class="card">
+      @if($datas->gambar == '')
+      <img src="{{asset('picture.png')}}" alt="..." class="card-img-top rounded-circle mx-auto d-block" height="240px" width="240">
+      @else 
+      <img src="{{asset('storage/'.$datas->gambar)}}" alt="..." class="card-img-top rounded-circle mx-auto d-block" height="240px" width="240">
+      @endif
+      <div class="card-body">
+        <h5 class="card-title">{{$datas->judul}}</h5>
+      </div>
+      <a href="{{route('blog.detail', $datas->slug)}}" class="custom-card stretched-link"></a> 
+      <div class="card-footer bg-warning">
+        <small class="text-dark" >Terakhir diubah {{$datas->updated_at}}</small>
+      </div>
     </div>
-    <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </div>
-  </div>
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </div>
-  </div>
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </div>
-  </div>
+   
+  @endforeach
 </div>
 </div> 
 

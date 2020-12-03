@@ -14,9 +14,15 @@ class ManageBlog extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = Blog::orderBy('created_at', 'DESC')->paginate(10);
+        if($request->cari != '') {
+            $data = Blog::orderBy('created_at', 'DESC')
+                ->where('judul','like',"%".$request->cari."%")
+                ->paginate(10);
+        } else {
+            $data = Blog::orderBy('created_at', 'DESC')->paginate(10);
+        }
         // return $data;
         return view('admin.blog.index', ['data' => $data]);
     }
@@ -29,7 +35,7 @@ class ManageBlog extends Controller
     public function store(Request $request)
     {   
         $validasi = $this->validate($request, [
-            'judul'     => 'required|string',
+            'judul'     => 'required|string|unique:blogs',
             'artikel'   => 'required|string',
             'gambar'    => 'image|mimes:jpeg,png,jpg|max:3072'
         ]);
@@ -39,22 +45,22 @@ class ManageBlog extends Controller
         $data->slug = Str::slug($request->judul);
 
 
-            $gambar = $request->file('gambar');
-            if ($gambar) {
-                $gambar_path = $gambar->store('gambar', 'public');
-                $data->gambar = $gambar_path;
-            }
+        $gambar = $request->file('gambar');
+        if ($gambar) {
+            $gambar_path = $gambar->store('gambar', 'public');
+            $data->gambar = $gambar_path;
+        }
 
         $data->artikel = $request->artikel;
         $data->admin_id = Auth::guard('admin')->user()->id;
         $data->save();
 
-        return redirect()->back()->with('success', '/blog' );
+        return redirect()->back()->with('success', $data->slug);
     }
 
     public function show($id)
     {
-        
+
     }
 
     public function edit($id)
@@ -69,15 +75,39 @@ class ManageBlog extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $validasi = $this->validate($request, [
+            'judul'     => 'required|string',
+            'artikel'   => 'required|string',
+            'gambar'    => 'image|mimes:jpeg,png,jpg|max:3072'
+        ]);
+
+        $data = Blog::findOrFail($id);
+        $data->judul = $request->judul;
+        $data->slug = Str::slug($request->judul);
+
+
+            $gambar = $request->file('gambar');
+            if ($gambar) {
+                if ($data->gambar && file_exists(storage_path('app/public/' . $data->gambar))) {
+                    \Storage::delete('public/' . $data->gambar);
+                }
+                $gambar_path = $gambar->store('gambar', 'public');
+                $data->gambar = $gambar_path;
+            }
+
+        $data->artikel = $request->artikel;
+        $data->admin_id = Auth::guard('admin')->user()->id;
+        $data->save();
+
+        return redirect()->route('blog.edit', $data->slug)->with('success', $data->slug);
     }
 
     public function destroy($id)
     {
         $data = Blog::findOrFail($id);
         if ($data->gambar && file_exists(storage_path('app/public/' . $data->gambar))) {
-                \Storage::delete('public/' . $data->gambar);
-            }
+            \Storage::delete('public/' . $data->gambar);
+        }
         $data->delete();
 
         return redirect()->back()->with('success', 'Berhasil Menghapus Blog');

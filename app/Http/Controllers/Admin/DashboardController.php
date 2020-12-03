@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Blog;
+use App\Dokter;
+use App\User;
 class DashboardController extends Controller
 {
 	public function __construct()
@@ -13,6 +15,13 @@ class DashboardController extends Controller
 	}
 
 	public function index() {
-		return view('admin.dashboard');
+		$jmlblog = Blog::count();
+		$jmldokter = Dokter::count();
+		$jmluser = User::count();
+		return view('admin.dashboard', [
+			'jmlblog' => $jmlblog,
+			'jmluser' => $jmluser,
+			'jmldokter' => $jmldokter
+		]);
 	}
 }

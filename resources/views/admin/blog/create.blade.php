@@ -6,8 +6,11 @@
   <div class="row justify-content-center">
     <div class="col-md-10">
       @if(session('success'))
-      <div class="alert alert-success">
-        Berhasil Menambah Blog ! <a href="">sunting</a>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Berhasil Menambah Blog ! <a href="{{route('blog.edit', session('success'))}}">sunting</a> atau <a href="{{route('blog.detail', session('success'))}}">tinjau</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       @elseif(session('error'))
       <div class="alert alert-danger">
@@ -52,7 +55,7 @@
               </div>   
             <!-- </div> -->
             <div class="form-group col-md-12">
-              <textarea class="ckeditor" id="ckeditor" rows="5" name="artikel">{{old('artikel')}}</textarea>
+              <textarea class="ckeditor" id="ckeditor" rows="8" name="artikel">{{old('artikel')}}</textarea>
             </div>
           </form>
         </div>
