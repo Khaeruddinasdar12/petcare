@@ -51,6 +51,12 @@
   <p class="lead">Dapatkan informasi seputar kesehatan hewan dan cara pemeliharaan hewan yang baik dan benar.</p>
 </div>
 <div class="card-deck">
+  @if($data->isEmpty())
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <p class="text-danger">Blog belum ada blog</p>
+  </div>
+  
+  @else
   @foreach($data as $datas)
   
     <div class="card">
@@ -69,6 +75,7 @@
     </div>
    
   @endforeach
+  @endif
 </div>
 </div> 
 

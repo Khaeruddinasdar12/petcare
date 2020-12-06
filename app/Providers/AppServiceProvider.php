@@ -40,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
             if($request->is('dokter/login')) {
                 $guard = '';
             }
+        } else {
+            $guard = 'user';
         }
         // $guard = 'admisn';
         View::share('guard', $guard);

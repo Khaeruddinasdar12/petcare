@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row mb-4">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header alert-dark">Selamat Datang <b>{{ Auth::user()->name }}</b></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,13 +14,47 @@
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <i>MyPets</i> adalah salah satu startup yang bergerak dibidang kesehatan hewan yang tujuannya memudahkan masyarakat untuk menemukan klinik hewan terdekat sesuai dengan lokasi tempat tinggalnya serta memudahkan juga dalam berkonsultasi langsung dengan dokter hewan.
+
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card border-success mb-3" style="max-width: 18rem;">
+              <div class="card-header text-dark alert-success">Pesanan</div>
+              <div class="card-body text-success">
+                <h1>2</h1>
+                <p class="card-text">dokter yang terverifikasi</p>
+                <a href="#" class="btn btn-outline-success btn-sm">lihat semua</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header text-dark alert-secondary">Jumlah User</div>
+            <div class="card-body text-secondary">
+                <h1>2</h1>
+                <p class="card-text">user yang terdaftar</p>
+                <a href="#" class="btn btn-outline-secondary btn-sm">lihat semua</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-primary mb-3" style="max-width: 18rem;">
+          <div class="card-header text-dark alert-primary">Jumlah Blog</div>
+          <div class="card-body text-primary">
+            <h1>2</h1>
+            <p class="card-text">dibuat oleh admin dan dokter</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">lihat semua</a>
+        </div>
+    </div>
+</div>
+</div>
 </div>
 @endsection
+
 
 @section('js')
 

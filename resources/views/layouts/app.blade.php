@@ -59,10 +59,10 @@
 </head>
 <body>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark bg-info shadow-sm" style="background-color:#5F9EA0 !important">
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm navbar-laravel" style="background-color:#5F9EA0 !important">
       <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-          {{ config('app.name', 'Pet Care') }}
+          {{ config('app.name', 'Pet Care') }} {{$guard}}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
           <span class="navbar-toggler-icon"></span>
@@ -79,7 +79,7 @@
             <!-- Authentication Links -->
             @guest
             <li class="nav-item">
-              <a class="nav-link" href="{{route('index')}}">Home</a>
+              <a class="nav-link" href="{{route('produk')}}">Produk</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('blog') }}">Blog</a>
@@ -102,6 +102,9 @@
             @if($guard == 'admin')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('barang.index')}}">Manage Barang</a>
             </li>
             <li class="nav-item dropdown">
               <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -130,6 +133,24 @@
               </div>
             </li>
             @elseif($guard == 'user')
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('home')}}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('produk')}}">Pesanan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('produk')}}">Produk</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Tanya Dokter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
+            </li>
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->name }}
