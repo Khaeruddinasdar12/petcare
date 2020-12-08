@@ -62,7 +62,7 @@
     <nav class="navbar navbar-expand-md navbar-dark shadow-sm navbar-laravel" style="background-color:#5F9EA0 !important">
       <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-          {{ config('app.name', 'Pet Care') }} {{$guard}}
+          {{ config('app.name', 'Pet Care') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
           <span class="navbar-toggler-icon"></span>
