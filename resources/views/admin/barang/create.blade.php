@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title') | Admin | Blog-create @endsection
+@section('title') | Admin | Barang-create @endsection
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-10">
       @if(session('success'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Berhasil Menambah Blog ! <a href="{{route('blog.edit', session('success'))}}">sunting</a> atau <a href="{{route('blog.detail', session('success'))}}">tinjau</a>
+        Berhasil Menambah Barang ! <a href="{{route('barang.edit', session('success'))}}">sunting</a> atau <a href="{{route('produk.detail', session('success'))}}">tinjau</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -29,11 +29,11 @@
       @endif
       <div class="card">
         <div class="card-body">
-          <form action="{{route('blog.store')}}" method="POST" accept="image/*" enctype="multipart/form-data">
+          <form action="{{route('barang.store')}}" method="POST" accept="image/*" enctype="multipart/form-data">
             @csrf
             <div class="row">
               <div class="col-md-6">
-                <h3>Tambah Blog Baru</h3>
+                <h3>Tambah Barang Baru</h3>
               </div> 
               <div class="col-md-6">
                 <button class="btn btn-outline-primary float-right" role="button" type="submit"><i class="fa fa-share-square"></i> Publish</button>
@@ -41,21 +41,42 @@
             </div>
             <br>
             <hr>
-            <div class="form-group col-md-12">
-              <label for="inputEmail4">Judul</label>
-              <input type="text" class="form-control" id="inputEmail4" name="judul" value="{{old('judul')}}">
-            </div>
-            <!-- <div class="form-row"> -->
-              <div class="form-group col-md-6">
-                <img id="preview" src="{{asset('picture.png')}}" width="90px" height="90px">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="col-md-12 row">
+                    <label for="inputEmail4">Nama Barang</label>
+                    <input type="text" class="form-control" id="inputEmail4" name="nama" value="{{old('nama')}}">
+                  </div>
+                  <div class="col-md-12 row">
+                    <label for="inputEmail4">Harga</label>
+                    <input type="text" class="form-control" id="inputEmail4" name="harga" value="{{old('harga')}}">
+                  </div>
+                  <div class="col-md-12 row">
+                    <label for="inputEmail4">Stok</label>
+                    <input type="number" class="form-control" id="inputEmail4" name="stok" value="{{old('stok')}}">
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group row col-md-12">
+                    <img id="preview" src="{{asset('picture.png')}}" width="90px" height="90px">
+                  </div>
+                  <div class="form-group row col-md-12">
+                    <label for="exampleFormControlFile1">Gambar Utama</label>
+                    <input type="file" onchange="tampilkanPreview(this,'preview')" accept="image/*" class="form-control-file" id="exampleFormControlFile1" name="gambar">
+                  </div>
+                </div>
+                
               </div>
-              <div class="form-group col-md-6">
-                <label for="exampleFormControlFile1">Gambar Utama</label>
-                <input type="file" onchange="tampilkanPreview(this,'preview')" accept="image/*" class="form-control-file" id="exampleFormControlFile1" name="gambar">
-              </div>   
-            <!-- </div> -->
-            <div class="form-group col-md-12">
-              <textarea class="ckeditor" id="ckeditor" rows="8" name="artikel">{{old('artikel')}}</textarea>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="ckeditor">Keterangan</label>
+                  <textarea class="ckeditor form-control" id="ckeditor" rows="8" name="keterangan">{{old('keterangan')}}</textarea>
+                </div>
+              </div>
             </div>
           </form>
         </div>

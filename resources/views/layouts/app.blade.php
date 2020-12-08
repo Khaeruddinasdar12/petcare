@@ -13,7 +13,7 @@
   <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet">
   <!-- Scripts -->
   
-
+  @yield('css')
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -59,7 +59,7 @@
 </head>
 <body>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark bg-info shadow-sm" style="background-color:#5F9EA0 !important">
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm navbar-laravel" style="background-color:#5F9EA0 !important">
       <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
           {{ config('app.name', 'Pet Care') }}
@@ -79,16 +79,16 @@
             <!-- Authentication Links -->
             @guest
             <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="{{route('produk')}}">Produk</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Blog</a>
+              <a class="nav-link" href="{{ route('blog') }}">Blog</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">Tanya Dokter</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">About</a>
+              <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -101,7 +101,10 @@
             @else
             @if($guard == 'admin')
             <li class="nav-item">
-              <a class="nav-link" href="">Dashboard</a>
+              <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('barang.index')}}">Manage Barang</a>
             </li>
             <li class="nav-item dropdown">
               <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -113,7 +116,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Manage Dokter</a>
+              <a class="nav-link" href="{{route('dokter.index')}}">Manage Dokter</a>
             </li>
             <li class="nav-item dropdown">
               <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -130,6 +133,24 @@
               </div>
             </li>
             @elseif($guard == 'user')
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('home')}}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('produk')}}">Pesanan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('produk')}}">Produk</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Tanya Dokter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
+            </li>
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->name }}
@@ -169,10 +190,48 @@
     </div>
   </nav>
 
-  <main class="py-4">
+  <main class="py-4 bg-white">
     @yield('content')
   </main>
 </div>
+
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+  <div class="row">
+    <div class="col-12 col-md">
+      <img class="mb-2" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+      <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Cool stuff</a></li>
+        <li><a class="text-muted" href="#">Random feature</a></li>
+        <li><a class="text-muted" href="#">Team feature</a></li>
+        <li><a class="text-muted" href="#">Stuff for developers</a></li>
+        <li><a class="text-muted" href="#">Another one</a></li>
+        <li><a class="text-muted" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Resource</a></li>
+        <li><a class="text-muted" href="#">Resource name</a></li>
+        <li><a class="text-muted" href="#">Another resource</a></li>
+        <li><a class="text-muted" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Team</a></li>
+        <li><a class="text-muted" href="#">Locations</a></li>
+        <li><a class="text-muted" href="#">Privacy</a></li>
+        <li><a class="text-muted" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
 </body>
 
 @yield('js')

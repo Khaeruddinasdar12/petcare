@@ -4,15 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class Barang extends Model
 {
-	protected $table = 'blogs';
-
 	protected $fillable = [
-		'judul', 'slug', 'gambar', 'artikel', 'admin_id', 'dokter_id'
+		'nama', 'harga', 'stok', 'keterangan', 'gambar'
 	];
 
-	public function getCreatedAtAttribute()
+    public function getCreatedAtAttribute()
 	{
 		return \Carbon\Carbon::parse($this->attributes['created_at'])
 		->translatedFormat('l, d F Y');
