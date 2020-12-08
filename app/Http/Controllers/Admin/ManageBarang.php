@@ -37,7 +37,7 @@ class ManageBarang extends Controller
             'harga'         => 'required|numeric',
             'stok'          => 'required|numeric',
             'keterangan'    => 'required|string',
-            'gambar'        => 'image|mimes:jpeg,png,jpg|max:3072'
+            'gambar'        => 'mimes:jpeg,png,jpg|max:3072'
         ]);
 
         $data = new Barang;
@@ -77,7 +77,7 @@ class ManageBarang extends Controller
             'harga'         => 'required|numeric',
             'stok'          => 'required|numeric',
             'keterangan'    => 'required|string',
-            'gambar'        => 'image|mimes:jpeg,png,jpg|max:3072'
+            'gambar'        => 'mimes:jpeg,png,jpg|max:3072'
         ]);
 
         $data = Barang::findOrFail($id);
