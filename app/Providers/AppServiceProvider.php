@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +23,23 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
-        //
+        $guard = '';
+        if ($request->is('admin/*') || $request->is('admin')) {
+            $guard = 'admin';
+            if($request->is('admin/login')) {
+                $guard = '';
+            }
+        } else if ($request->is('user/*') || $request->is('home')) {
+            $guard = 'user';
+        } else if($request->is('dokter/*') || $request->is('dokter')) {
+            $guard = 'dokter';
+            if($request->is('dokter/login')) {
+                $guard = '';
+            }
+        }
+        // $guard = 'admisn';
+        View::share('guard', $guard);
     }
 }
