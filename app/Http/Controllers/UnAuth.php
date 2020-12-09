@@ -10,7 +10,7 @@ class UnAuth extends Controller
 	public function index()
     {
     	$data = Blog::orderBy('updated_at', 'DESC')->limit(4)->get();
-    	$brg = Barang::orderBy('created_at', 'DESC')->limit(10)->get();
+    	$brg = Barang::orderBy('created_at', 'DESC')->limit(3)->get();
     	return view('welcome', ['data' => $data, 'brg' => $brg]);
     }
 
@@ -26,16 +26,18 @@ class UnAuth extends Controller
                 ->where('nama','like',"%".$request->cari."%")
                 ->paginate(10);
         } else {
-            $data = Barang::orderBy('created_at', 'DESC')->paginate(2);
+            $data = Barang::orderBy('created_at', 'DESC')->paginate(10);
         }
 
         return view('produk', ['data' => $data]);
     }
 
-    // public function produkdetail() //halaman tampilkan detail barang
-    // {
-        
-    // }
+    public function produkdetail($id) //halaman tampilkan detail barang
+    {
+        $data = Barang::findOrFail($id);
+
+        return view('produkdetail', ['data' => $data]);
+    }
 
     public function blog(Request $request)
     {

@@ -36,8 +36,16 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 	Route::resource('/blog', 'ManageBlog');
 	Route::resource('/barang', 'ManageBarang');
 
+	// Manage Pesanan
+	Route::get('pesanan', 'PesananController@pesanan')->name('admin.pesanan');
+	Route::put('konfirmasi-pesanan/{id}', 'PesananController@konfirmasi')->name('admin.konfirmasipesanan');
+	Route::get('riwayat-pesanan', 'PesananController@riwayat')->name('admin.riwayatpesanan');
+	Route::delete('hapus-pesanan/{id}', 'PesananController@delete')->name('admin.hapuspesanan');
+
 	// manage dokter
-	Route::get('manage-dokter', 'ManageDokter@index')->name('dokter.index');
+	Route::get('dokter', 'ManageDokter@index')->name('admin.dokter'); //belum konfirmasi
+	Route::get('dokter-aktif', 'ManageDokter@aktif')->name('admin.dokteraktif');
+	Route::put('dokter-aktif/{id}', 'ManageDokter@konfirmasi')->name('admin.konfirmasidokter');
 
 });
 //END RUTE ADMIN
@@ -46,6 +54,12 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 //RUTE USER
 Route::prefix('user')->namespace('User')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('user.dashboard');
+	Route::put('/transaksi/{id}', 'TransaksiProduk@transaksi')->name('user.transaksi'); //membeli
+
+	Route::put('/pesanan/bukti/{id}', 'PesananController@sendBukti')->name('user.sendbukti');
+	Route::get('/pesanan', 'PesananController@pesanan')->name('user.pesanan');
+	Route::get('/pesanan-batal', 'PesananController@batal')->name('user.pesanan_batal');
+	Route::get('/pesanan-riwayat', 'PesananController@riwayat')->name('user.pesanan_riwayat');
 
 });
 //END RUTE USER
@@ -58,6 +72,9 @@ Route::post('dokter/logout', 'Auth\DokterAuthController@postLogout')->name('dokt
 
 Route::prefix('dokter')->namespace('Dokter')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('dokter.dashboard');
+	Route::get('/profile', 'DashboardController@profile')->name('dokter.profile');
+	Route::post('/profile', 'DashboardController@updateprofile')->name('dokter.profile');
+
 	Route::get('/daftar', 'Manage@regisdokter')->name('dokter.register');
 	Route::post('/daftar', 'Manage@store')->name('dokter.postregister');
 

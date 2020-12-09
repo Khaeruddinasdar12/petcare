@@ -91,11 +91,11 @@
               <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-            </li>
+              <a class="btn btn-outline-warning" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>&nbsp;
             @if (Route::has('register'))
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+              <a class="btn btn-warning" href="{{ route('register') }}">Daftar</a>
             </li>
             @endif
             @else
@@ -103,8 +103,23 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('barang.index')}}">Manage Barang</a>
+            <li class="nav-item dropdown">
+              <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                Pesanan <span class="caret"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
+                <a href="{{route('admin.pesanan')}}" class="dropdown-item">Pesanan (belum konfirmasi)</a>
+                <a href="{{route('admin.riwayatpesanan')}}" class="dropdown-item">Riwayat Pesanan</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                Manage Barang <span class="caret"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
+                <a href="{{route('barang.index')}}" class="dropdown-item">Semua Barang</a>
+                <a href="{{route('barang.create')}}" class="dropdown-item">Tambah Barang</a>
+              </div>
             </li>
             <li class="nav-item dropdown">
               <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -115,8 +130,14 @@
                 <a href="{{route('blog.create')}}" class="dropdown-item">Tambah Blog</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('dokter.index')}}">Manage Dokter</a>
+            <li class="nav-item dropdown">
+              <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                Manage Dokter <span class="caret"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
+                <a href="{{route('admin.dokter')}}" class="dropdown-item">Dokter (Belum konfirmasi)</a>
+                <a href="{{route('admin.dokteraktif')}}" class="dropdown-item">Dokter (Terkonfirmasi))</a>
+              </div>
             </li>
             <li class="nav-item dropdown">
               <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -136,8 +157,15 @@
             <li class="nav-item">
               <a class="nav-link" href="{{route('home')}}">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('produk')}}">Pesanan</a>
+            <li class="nav-item dropdown">
+              <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                Pesanan <span class="caret"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
+                <a href="{{route('user.pesanan')}}" class="dropdown-item">Pesanan (belum konfirmasi)</a>
+                <a href="{{route('user.pesanan_riwayat')}}" class="dropdown-item">Riwayat Pesanan</a>
+                <a href="{{route('user.pesanan_batal')}}" class="dropdown-item">Dibatalkan</a>
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('produk')}}">Produk</a>
@@ -175,6 +203,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
               <a href="{{route('dokter.dashboard')}}" class="dropdown-item">Dashboard</a>
+              <a href="{{route('dokter.profile')}}" class="dropdown-item">Profile</a>
               <a class="dropdown-item" href="#" onclick="event.preventDefault();document.querySelector('#admin-logout-form').submit();">
                 Logout
               </a>
@@ -183,7 +212,29 @@
               </form>
             </div>
           </li>
+          @else
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('produk')}}">Produk</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Tanya Dokter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-warning" href="{{ route('login') }}">{{ __('Login') }}</a>
+          </li>&nbsp;
+          @if (Route::has('register'))
+          <li class="nav-item">
+            <a class="btn btn-warning" href="{{ route('register') }}">Daftar</a>
+          </li>
           @endif
+          @endif
+
           @endguest
         </ul>
       </div>
@@ -191,6 +242,20 @@
   </nav>
 
   <main class="py-4 bg-white">
+    @if($guard == 'dokter')
+    @if(Auth::guard('dokter')->user()->status != '1')
+    <div class="container">
+    <div class="row col-md-12 justify-content-center">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Akun anda belum diverifikasi, abaikan jika Anda telah mengisi keterangan saat mendaftar dan tunggu konfirmasi Admin ! isi keterangan <a href="{{route('dokter.profile')}}" class="alert-link">disini</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    </div>
+    @endif
+    @endif
     @yield('content')
   </main>
 </div>
@@ -234,6 +299,8 @@
 </footer>
 </body>
 
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
 @yield('js')
-<script src="{{ asset('js/app.js') }}" defer></script>
+
 </html>

@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $guard = 'user';
         } else if($request->is('dokter/*') || $request->is('dokter')) {
             $guard = 'dokter';
-            if($request->is('dokter/login')) {
+            if($request->is('dokter/login') || $request->is('dokter/daftar')) {
                 $guard = '';
             }
         } else {

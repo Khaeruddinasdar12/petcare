@@ -47,7 +47,7 @@
       <div class="card-body text-primary">
         <h1>{{$jmlblog}}</h1>
         <p class="card-text">dibuat oleh admin dan dokter</p>
-        <a href="#" class="btn btn-outline-primary btn-sm">lihat semua</a>
+        <a href="{{route('blog.index')}}" class="btn btn-outline-primary btn-sm">lihat semua</a>
     </div>
 </div>
 </div>

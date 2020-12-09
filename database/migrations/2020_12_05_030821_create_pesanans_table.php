@@ -15,11 +15,17 @@ class CreatePesanansTable extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->string('alamat');
+            $table->string('nohp');
             $table->integer('jumlah');
+            $table->integer('harga');
             $table->integer('total');
             $table->integer('barang_id');
             $table->integer('user_id');
+            $table->enum('status', ['0', '1', '2']); // 0 belum, 1 sudah, 2 batal
+            $table->string('keterangan')->nullable();
+            $table->string('bukti')->nullable();
             $table->timestamps();
         });
     }

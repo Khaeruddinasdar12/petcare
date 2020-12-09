@@ -32,7 +32,7 @@
           <div class="mb-1 text-muted">Rp. {{format_uang($datas->harga)}}</div>
           <p class="mb-auto">{!! substr($datas->keterangan, 0, 50) !!}</p>
           <a href="{{route('produk.detail', $datas->id)}}" class="stretched-link"></a>
-          <a href="{{route('produk')}}" class="btn btn-success btn-sm">Beli sekarang</a>
+          <a href="{{route('produk.detail', $datas->id)}}" class="btn btn-success btn-sm">Beli sekarang</a>
         </div>
         @if($datas->gambar == '')
         <div class="col-auto d-none d-lg-block">

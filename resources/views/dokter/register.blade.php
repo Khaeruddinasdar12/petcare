@@ -3,11 +3,16 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <img src="{{asset('dokter-hewan.png')}}" class="img-fluid" alt="Responsive image">
+        <div class="col-md-12">
+            <h2 class="text-muted text-center">Daftar Sebagai Dokter</h2>
+        </div>
+        
+        <div class="col-md-4">
+            <img src="{{asset('dokter-hewan.png')}}" class="img-fluid" alt="Responsive image">
+        </div>
         <div class="col-md-8">
 
             <!-- <div class="card"> -->
-                <h2 class="text-muted">Daftar Sebagai Dokter</h2>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('dokter.postregister') }}">
@@ -75,6 +80,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Daftar
                                 </button>
+                                <a class="btn btn-link" href="{{ route('dokter.login') }}">
+                                Login disini
+                            </a>
                             </div>
                         </div>
                     </form>

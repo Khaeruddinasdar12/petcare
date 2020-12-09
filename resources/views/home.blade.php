@@ -25,32 +25,33 @@
             <div class="card border-success mb-3" style="max-width: 18rem;">
               <div class="card-header text-dark alert-success">Pesanan</div>
               <div class="card-body text-success">
-                <h1>2</h1>
-                <p class="card-text">dokter yang terverifikasi</p>
-                <a href="#" class="btn btn-outline-success btn-sm">lihat semua</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card border-secondary mb-3" style="max-width: 18rem;">
-            <div class="card-header text-dark alert-secondary">Jumlah User</div>
-            <div class="card-body text-secondary">
-                <h1>2</h1>
-                <p class="card-text">user yang terdaftar</p>
-                <a href="#" class="btn btn-outline-secondary btn-sm">lihat semua</a>
+                <h1>{{$psn}}</h1>
+                <p class="card-text">Pesanan Anda saat ini</p>
+                <a href="{{route('user.pesanan')}}" class="btn btn-outline-success btn-sm">lihat semua</a>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="card border-primary mb-3" style="max-width: 18rem;">
-          <div class="card-header text-dark alert-primary">Jumlah Blog</div>
+          <div class="card-header text-dark alert-primary">Jumlah Riwayat</div>
           <div class="card-body text-primary">
-            <h1>2</h1>
-            <p class="card-text">dibuat oleh admin dan dokter</p>
-            <a href="#" class="btn btn-outline-primary btn-sm">lihat semua</a>
+            <h1>{{$rwyt}}</h1>
+            <p class="card-text">Semua riwayat belanja Anda</p>
+            <a href="{{route('user.pesanan_riwayat')}}" class="btn btn-outline-primary btn-sm">lihat semua</a>
+        </div>
+    </div>
+</div> 
+<div class="col-md-3">
+    <div class="card border-secondary mb-3" style="max-width: 18rem;">
+        <div class="card-header text-dark alert-secondary">Pesanan Dibatalkan</div>
+        <div class="card-body text-secondary">
+            <h1>{{$btl}}</h1>
+            <p class="card-text">Pesanan Anda dibatalkan admin</p>
+            <a href="{{route('user.pesanan_batal')}}" class="btn btn-outline-secondary btn-sm">lihat semua</a>
         </div>
     </div>
 </div>
+
 </div>
 </div>
 @endsection
