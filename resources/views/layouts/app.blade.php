@@ -85,7 +85,7 @@
               <a class="nav-link" href="{{ route('blog') }}">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Tanya Dokter</a>
+              <a class="nav-link" href="{{route('tanya.dokter')}}">Tanya Dokter</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
@@ -174,7 +174,7 @@
               <a class="nav-link" href="{{ route('blog') }}">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Tanya Dokter</a>
+              <a class="nav-link" href="{{route('tanya.dokter')}}">Tanya Dokter</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
@@ -220,7 +220,7 @@
             <a class="nav-link" href="{{ route('blog') }}">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Tanya Dokter</a>
+            <a class="nav-link" href="{{route('tanya.dokter')}}">Tanya Dokter</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>

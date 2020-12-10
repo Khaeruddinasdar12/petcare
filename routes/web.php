@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/blog', 'UnAuth@blog')->name('blog');
 Route::get('/produk', 'UnAuth@produk')->name('produk');
 Route::get('/produk/{id}', 'UnAuth@produkdetail')->name('produk.detail');
+Route::get('/tanya-dokter', 'ChatController@tanyaDokter')->name('tanya.dokter');
 Route::get('/chat', 'ChatController@index');
 Route::get('/blog/{slug}', 'BlogController@blog')->name('blog.detail');
 
