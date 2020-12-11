@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title') | Dokter - daftar @endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,7 +9,16 @@
         </div>
         
         <div class="col-md-4">
-            <img src="{{asset('dokter-hewan.png')}}" class="img-fluid" alt="Responsive image">
+            <div class="card-body">
+                <h2 class="blog-post-title">Syarat & Ketentuan</h2>
+                <p class="blog-post-meta text-muted">Anda harus memenuhi syarat berikut untuk menjadi dokter di sistem <i>MyPets</i></p>
+                
+                <ul>
+                    <li>Harus memiliki akun dokter atau pernah mendaftar sebagai dokter.</li>
+                    <li>Email harus email aktif.</li>
+                    <li>Keterangan harus berisi kompentensi yang dimiliki.</li>
+                </ul>
+            </div>
         </div>
         <div class="col-md-8">
 

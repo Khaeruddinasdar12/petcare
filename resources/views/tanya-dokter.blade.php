@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title') | Tanya dokter @endsection
+
 @section('css')
 <style type="text/css">
   .row .btn {
@@ -9,13 +11,28 @@
 @endsection
 @section('content')
 <div class="container">
-  <h2 class="justify-content-center text-center"><i class="fa fa-user-md"></i> Dokter <i>MyPets</i></h2>
+  <div class="row">
+    <div class="col-md-6">
+      <h2><i class="fa fa-user-md"></i> Dokter <i>MyPets</i></h2>
+    </div>
+    <div class="col-md-6">
+      
+      <a href="{{route('dokter.register')}}" class="float-right btn btn-outline-success"><i class="fa fa-user-md"></i> Daftar dokter</a>
+    </div>
+    
+    
+  </div>
+  
   <br>
   <form action="{{route('tanya.dokter')}}" method="get">
-    <div class="input-group mb-4 col-md-12 justify-content-center">
-      <input type="text" class="form-control" @if(\Request::get('cari') != '') value="{{\Request::get('cari')}}" @else placeholder="cari nama dokter.." @endif aria-describedby="button-addon2" name="cari">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="input-group mb-4">
+          <input type="text" class="form-control" @if(\Request::get('cari') != '') value="{{\Request::get('cari')}}" @else placeholder="cari nama dokter.." @endif aria-describedby="button-addon2" name="cari">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
       </div>
     </div>
   </form>
