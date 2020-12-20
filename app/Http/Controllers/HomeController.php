@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pesanan;
 use Auth;
+use App\Dokter;
 class HomeController extends Controller
 {
     /**
@@ -22,6 +23,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function profileDokter($id)
+    {
+        $data = Dokter::findOrFail($id);
+        return view('profiledokter', ['data' => $data]);
+    }
+
     public function index()
     {
         $psn = Pesanan::where('user_id', Auth::user()->id)

@@ -34,7 +34,7 @@
           <h3>Riwayat Pesanan</h3>
         </div>
         <div class="col-md-6">
-          <form action="{{route('user.pesanan')}}" method="get">
+          <form action="{{route('user.pesanan_riwayat')}}" method="get">
           <div class="input-group mb-2">
             <input type="text" class="form-control" @if(\Request::get('cari') != '') value="{{\Request::get('cari')}}" @else placeholder="cari nama barang.." @endif aria-describedby="button-addon2" name="cari">
             <div class="input-group-append">

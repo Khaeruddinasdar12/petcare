@@ -22,10 +22,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/blog', 'UnAuth@blog')->name('blog');
 Route::get('/produk', 'UnAuth@produk')->name('produk');
 Route::get('/produk/{id}', 'UnAuth@produkdetail')->name('produk.detail');
-Route::get('/tanya-dokter', 'ChatController@tanyaDokter')->name('tanya.dokter');
+
 Route::get('/chat', 'ChatController@index');
 Route::get('/blog/{slug}', 'BlogController@blog')->name('blog.detail');
-
+Route::get('/tanya-dokter', 'ChatController@tanyaDokter')->name('tanya.dokter');
+Route::get('/tanya-dokter/{id}/profile', 'HomeController@profileDokter')->name('profile.dokter');
+Route::get('/tanya-dokter/{id}/chat', 'User\MessageController@index')->name('user.chat'); //USER 
 
 //RUTE ADMIN 
 Route::get('admin/login', 'Auth\AdminAuthController@getLogin')->name('admin.login');
@@ -61,6 +63,8 @@ Route::prefix('user')->namespace('User')->group(function () {
 	Route::get('/pesanan', 'PesananController@pesanan')->name('user.pesanan');
 	Route::get('/pesanan-batal', 'PesananController@batal')->name('user.pesanan_batal');
 	Route::get('/pesanan-riwayat', 'PesananController@riwayat')->name('user.pesanan_riwayat');
+
+
 
 });
 //END RUTE USER

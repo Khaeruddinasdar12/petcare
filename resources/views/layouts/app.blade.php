@@ -245,58 +245,49 @@
     @if($guard == 'dokter')
     @if(Auth::guard('dokter')->user()->status != '1')
     <div class="container">
-    <div class="row col-md-12 justify-content-center">
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        Akun anda belum diverifikasi, abaikan jika Anda telah mengisi keterangan saat mendaftar dan tunggu konfirmasi Admin ! isi keterangan <a href="{{route('dokter.profile')}}" class="alert-link">disini</a>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="row col-md-12 justify-content-center">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          Akun anda belum diverifikasi, abaikan jika Anda telah mengisi keterangan saat mendaftar dan tunggu konfirmasi Admin ! isi keterangan <a href="{{route('dokter.profile')}}" class="alert-link">disini</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
-    </div>
     </div>
     @endif
     @endif
     @yield('content')
+    <footer class="pt-4 my-md-5 pt-md-5 border-top text-center container">
+      <div class="row">
+        <div class="col-4 col-md">
+          <h5>Features</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Live Chat</a></li>
+            <li><a class="text-muted" href="#">Pet Shop</a></li>
+            <li><a class="text-muted" href="#">Nearby</a></li>
+          </ul>
+        </div>
+        <div class="col-4 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Laravel</a></li>
+            <li><a class="text-muted" href="#">jQuery</a></li>
+          </ul>
+        </div>
+        <div class="col-4 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Email</a></li>
+            <li><a class="text-muted" href="#">Phone</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </main>
+
 </div>
 
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-  <div class="row">
-    <div class="col-12 col-md">
-      <img class="mb-2" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-      <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Features</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Cool stuff</a></li>
-        <li><a class="text-muted" href="#">Random feature</a></li>
-        <li><a class="text-muted" href="#">Team feature</a></li>
-        <li><a class="text-muted" href="#">Stuff for developers</a></li>
-        <li><a class="text-muted" href="#">Another one</a></li>
-        <li><a class="text-muted" href="#">Last time</a></li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Resources</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Resource</a></li>
-        <li><a class="text-muted" href="#">Resource name</a></li>
-        <li><a class="text-muted" href="#">Another resource</a></li>
-        <li><a class="text-muted" href="#">Final resource</a></li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>About</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Team</a></li>
-        <li><a class="text-muted" href="#">Locations</a></li>
-        <li><a class="text-muted" href="#">Privacy</a></li>
-        <li><a class="text-muted" href="#">Terms</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
+
 </body>
 
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}" type="text/javascript"></script>

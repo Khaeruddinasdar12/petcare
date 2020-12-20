@@ -4,7 +4,7 @@
 
 @section('css')
 <style type="text/css">
-  .row .btn {
+  .card .btn {
     z-index: 1;
   }
 </style>
@@ -42,15 +42,16 @@
   <div class="card-deck mb-3">
     @foreach($data as $datas)
     <div class="col-md-4">
-      <div class="card h-100" style="width: 18rem;">
+      <div class="card h-100 position-relative" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title text-success">{{$datas->name}}</h5>
+          <h5 class="card-title text-success"><i class="fa fa-user-md"></i> {{$datas->name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">dokter hewan</h6>
           <p class="card-text">{!! substr($datas->keterangan, 0, 50) !!}</p>
+          <a href="{{route('profile.dokter', $datas->id)}}" class="stretched-link"></a>
           
         </div>
         <div class="card-footer alert-light">
-          <a href="#" class="btn btn-sm btn-primary">Mulai chat</a>
+          <a href="{{route('user.chat', $datas->id)}}" class="btn btn-sm btn-primary stretched-link position-relative" target="_blank"><i class="fa fa-comments"></i> Mulai chat</a>
         </div>
       </div>
     </div>

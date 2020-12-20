@@ -15,6 +15,11 @@ class CreateChatsTable extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('user_id')->unsigned();
+            // $table->bigInteger('dokter_id')->unsigned();
+            // $table->string('pesan');
+            // $table->enum('status', ['0', '1']); //1 untuk terbaca . . 0 untuk belum
+            // $table->enum('from', ['0', '1']); //1 untuk user . . 0 untuk dokter
             $table->timestamps();
         });
     }

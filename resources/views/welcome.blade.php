@@ -68,7 +68,7 @@
         <img src="{{asset('storage/'.$barang->gambar)}}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{$barang->nama}}</h5>
-          <p class="card-text">{!! substr($barang->keterangan, 0, 50) !!}</p>
+          <p class="card-text">{!! substr($barang->keterangan, 0, 50) !!} ...</p>
           <a href="{{route('produk.detail', $barang->id)}}" class="stretched-link"></a>
           <a href="{{route('produk.detail', $barang->id)}}" class="btn btn-success btn-sm stretched-link"><i class="fa fa-shopping-cart"></i> Beli sekarang</a>
         </div>
