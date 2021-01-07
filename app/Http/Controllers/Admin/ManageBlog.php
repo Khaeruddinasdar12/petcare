@@ -37,7 +37,7 @@ class ManageBlog extends Controller
         $validasi = $this->validate($request, [
             'judul'     => 'required|string|unique:blogs',
             'artikel'   => 'required|string',
-            'gambar'    => 'required|image|mimes:jpeg,png,jpg|max:3072'
+            'gambar'    => 'image|mimes:jpeg,png,jpg|max:3072'
         ]);
 
         $data = new Blog;
