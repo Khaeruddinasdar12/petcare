@@ -27,7 +27,7 @@
               <div class="card-body text-success">
                 <h1>{{$jmldokter}}</h1>
                 <p class="card-text">dokter yang terverifikasi</p>
-                <a href="#" class="btn btn-outline-success btn-sm">lihat semua</a>
+                <a href="{{route('admin.dokteraktif')}}" class="btn btn-outline-success btn-sm">lihat semua</a>
             </div>
         </div>
     </div>

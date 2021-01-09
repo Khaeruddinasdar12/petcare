@@ -22,7 +22,7 @@
         <p><em>MyPets</em> hadir sebagai solusi bagi kesehatan hewan peliharaan Anda, kami menyediakan berbagai peralatan, bahan dan tips-tips seputar kesehatan hewan.</p>
         <hr class="my-4">
         <p>Kunjungi terus dan ikuti perkembangan informasi dari <em>MyPets</em>. Tanya Dokter dan dapatkan informasi khusus seputar hewan peliharaan.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Chat dokter</a>
+        <a class="btn btn-primary btn-lg" href="{{route('tanya.dokter')}}" role="button">Chat dokter</a>
       </div>
     </div>
   </div>
