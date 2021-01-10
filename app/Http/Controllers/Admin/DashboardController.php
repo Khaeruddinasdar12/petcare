@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
 	public function index() {
 		$jmlblog = Blog::count();
-		$jmldokter = Dokter::count();
+		$jmldokter = Dokter::where('status', '1')->count();
 		$jmluser = User::count();
 		return view('admin.dashboard', [
 			'jmlblog' => $jmlblog,

@@ -29,6 +29,8 @@ Route::get('/tanya-dokter', 'ChatController@tanyaDokter')->name('tanya.dokter');
 Route::get('/tanya-dokter/{id}/profile', 'HomeController@profileDokter')->name('profile.dokter');
 Route::get('/tanya-dokter/{id}/chat', 'User\MessageController@index')->name('user.chat'); //USER 
 
+Route::post('create-chat', 'User\MessageController@store')->name('user.createchat');
+
 //RUTE ADMIN 
 Route::get('admin/login', 'Auth\AdminAuthController@getLogin')->name('admin.login');
 Route::post('admin/login', 'Auth\AdminAuthController@postLogin')->name('admin.postlogin');
