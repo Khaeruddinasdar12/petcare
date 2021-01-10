@@ -5,7 +5,7 @@
 
 <html>
 <head>
-  <title>MyPets | Chat Dokter</title>
+  <title>MyPets | Chat</title>
   <link href="{{asset('chat/font-awesome/css/font-awesome.css')}}" type="text/css" rel="stylesheet">
   <!-- <script src="{{asset('chat/js/jquery.min.js')}}"></script> -->
   <script src="{{ asset('js/jquery-3.4.1.min.js') }}" type="text/javascript"></script>
@@ -62,76 +62,18 @@
               </div>
             </div>
             <div class="inbox_chat">
+              @foreach($user as $usr)
               <div class="chat_list active_chat">
                 <div class="chat_people">
                   <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                   <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                    <h5>{{$usr->name}} <span class="chat_date">{{$usr->waktu}}</span></h5>
                     <p>Test, which is a new approach to have all solutions 
                     astrology under one roof.</p>
                   </div>
                 </div>
               </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
           <div class="mesgs">
@@ -220,9 +162,8 @@
     messaging.onMessage((payload) => {
       console.log('Message received. ');
       console.log(payload);
-
-      alert('hai');
-      // location.reload();
+      alert('halaman dokter');
+      location.reload();
     });
     
 

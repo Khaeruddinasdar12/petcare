@@ -12,6 +12,16 @@ class Chat extends Model
 		'user_id', 'dokter_id', 'pesan', 'from'
 	];
 
+	public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function dokter()
+    {
+        return $this->belongsTo('App\Dokter', 'dokter_id');
+    }
+
     public function getCreatedAtAttribute()
 	{
 		return \Carbon\Carbon::parse($this->attributes['created_at'])

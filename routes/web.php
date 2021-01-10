@@ -85,5 +85,9 @@ Route::prefix('dokter')->namespace('Dokter')->group(function () {
 	Route::get('/daftar', 'Manage@regisdokter')->name('dokter.register');
 	Route::post('/daftar', 'Manage@store')->name('dokter.postregister');
 
+
+	// rute chat dokter 
+	Route::get('chat/{id}', 'MessageController@index')->name('dokter.chat');
+
 });
 //END RUTE DOKTER
