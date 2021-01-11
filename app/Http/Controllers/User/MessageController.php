@@ -75,15 +75,16 @@ class MessageController extends Controller
 		$validasi = $this->validate($request, [
             'pesan'     => 'required|string'
         ]);
+        
 		$data = new Chat;
 		$data->user_id = Auth::user()->id;
 		$data->dokter_id = $request->dokter_id;
 		$data->pesan = $request->pesan;
 		$data->from = '1'; //dari user
 		$data->save();
-
+        
 		$this->broadcast(Auth::user()->name, $request->pesan);
-
+        
 		return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil Menambah Data', 'idDokter' => $request->dokter_id );  	
 	}
 
