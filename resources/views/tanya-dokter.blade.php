@@ -16,7 +16,7 @@
       <h2><i class="fa fa-user-md"></i> Dokter <i>MyPets</i></h2>
     </div>
     <div class="col-md-6">
-      
+
       <a href="{{route('dokter.register')}}" class="float-right btn btn-outline-success"><i class="fa fa-user-md"></i> Daftar dokter</a>
     </div>
     
@@ -51,7 +51,12 @@
           
         </div>
         <div class="card-footer alert-light">
-          <a href="{{route('user.chat', $datas->id)}}" class="btn btn-sm btn-primary stretched-link position-relative" target="_blank"><i class="fa fa-comments"></i> Mulai chat</a>
+          <form action="{{route('user.chat')}}" method="post">
+            @csrf
+            <input type="hidden" name="idDokter" value="{{$datas->id}}">
+            <button class="btn btn-sm btn-primary stretched-link position-relative"><i class="fa fa-comments"></i> Mulai chat</button>
+          </form>
+          
         </div>
       </div>
     </div>

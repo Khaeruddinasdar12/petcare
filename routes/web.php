@@ -27,9 +27,10 @@ Route::get('/chat', 'ChatController@index');
 Route::get('/blog/{slug}', 'BlogController@blog')->name('blog.detail');
 Route::get('/tanya-dokter', 'ChatController@tanyaDokter')->name('tanya.dokter');
 Route::get('/tanya-dokter/{id}/profile', 'HomeController@profileDokter')->name('profile.dokter');
-Route::get('/tanya-dokter/{id}/chat', 'User\MessageController@index')->name('user.chat'); //USER 
+Route::get('/tanya-dokter/chat', 'User\MessageController@indexGet')->name('user.chat'); //USER 
+Route::post('/tanya-dokter/chat', 'User\MessageController@indexPost')->name('user.chat'); //USER 
 
-Route::post('create-chat', 'User\MessageController@store')->name('user.createchat');
+
 
 //RUTE ADMIN 
 Route::get('admin/login', 'Auth\AdminAuthController@getLogin')->name('admin.login');
@@ -57,6 +58,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
 
 //RUTE USER
+
+
 Route::prefix('user')->namespace('User')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('user.dashboard');
 	Route::put('/transaksi/{id}', 'TransaksiProduk@transaksi')->name('user.transaksi'); //membeli
@@ -67,8 +70,16 @@ Route::prefix('user')->namespace('User')->group(function () {
 	Route::get('/pesanan-riwayat', 'PesananController@riwayat')->name('user.pesanan_riwayat');
 
 
+	//table api list dokter yang chat
+	Route::get('/list-dokter', 'MessageController@listdokter')->name('user.list-dokter');
+	Route::get('/percakapan/{id}', 'MessageController@percakapan')->name('user.percakapan');
+
+	//kirim pesan oleh user
+	Route::post('create-chat', 'MessageController@store')->name('user.createchat');
 
 });
+
+
 //END RUTE USER
 
 
@@ -87,7 +98,16 @@ Route::prefix('dokter')->namespace('Dokter')->group(function () {
 
 
 	// rute chat dokter 
-	Route::get('chat/{id}', 'MessageController@index')->name('dokter.chat');
+	Route::get('chat', 'MessageController@index')->name('dokter.chat');
+
+
+	//table api list user yang chat
+	Route::get('/list-user', 'MessageController@listuser')->name('dokter.list-user');
+	Route::get('/percakapan/{id}', 'MessageController@percakapan')->name('user.percakapan');
+
+	//kirim pesan oleh dokter
+	Route::post('create-chat', 'MessageController@store')->name('dokter.createchat');
 
 });
+
 //END RUTE DOKTER

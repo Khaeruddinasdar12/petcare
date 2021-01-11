@@ -21,7 +21,7 @@
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -45,7 +45,7 @@
 </head>
 <body>
   <div class="container">
-    <h3 class=" text-center"><a href="{{ route('home') }}"><i class="fa fa-home"></i></a> Messaging</h3>
+    <h3 class=" text-center"><a href="{{ route('home') }}"><i class="fa fa-home"></i>| </a> <a href="{{route('tanya.dokter')}}">Lihat daftar Dokter</a>| Messaging  </h3>
     <div class="messaging">
       <div class="inbox_msg">
         <div class="inbox_people">
@@ -61,112 +61,22 @@
                 </span> </div>
               </div>
             </div>
-            <div class="inbox_chat">
-              <div class="chat_list active_chat">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions 
-                    astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
+            <div class="inbox_chat" id="list_dokter"> <!-- nav list dokter -->
+
             </div>
           </div>
           <div class="mesgs">
-            <div class="msg_history">
-              @foreach($chat as $chats)
-              @if($chats->from == '0') 
-              <!-- Jika dokter -->
-              <div class="incoming_msg">
-                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>{{$chats->pesan}}</p>
-                    <span class="time_date"> {{$chats->created_at}} </span>
-                  </div>
-                </div>
-              </div>
-              @else
-              <!-- Jika yang sedang login -->
-              <div class="outgoing_msg">
-                <div class="sent_msg">
-                  <p>{{$chats->pesan}}</p>
-                  <span class="time_date"> {{$chats->created_at}} </span>
-                </div>
-              </div>
-              @endif
-              @endforeach
+            <div class="msg_history" id="chat">
+              
               
               
             </div>
 
             <div class="type_msg">
               <div class="input_msg_write">
-                <form action="{{route('user.createchat')}}" method="post">
+                <form method="post" id="sendchat">
                   @csrf
-                  <input type="hidden" name="dokter_id" value="1">
+                  <input type="hidden" name="dokter_id" id="to-dokter-id" >
                   <input type="text" class="write_msg" placeholder="Type a message" name="pesan" autocomplete="off" />
                   <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                 </form>
@@ -194,7 +104,7 @@
         'user_id' : user_id
       }).then(res => {
         console.log(res);
-      }); 
+      });
     }
 
     function retrieveToken() {
@@ -212,24 +122,172 @@
     }
 
     retrieveToken();
-  
+
     messaging.onTokenRefresh(() => {
       retrieveToken();
     });
 
-    messaging.onMessage((payload) => {
+    messaging.onMessage((payload) => { // akan otomatis tereksekusi jika sendchat(id)
       console.log('Message received. ');
       console.log(payload);
 
-      alert('hai');
+      // alert('hai');
       // location.reload();
+      list_dokter();
+      // alert(idDokter);
+      chat(idDokter);  
     });
     
+    var idAuth = '{!! Auth::user()->id !!}'; // yang sedang login
 
-  </script>
+    var idDokter = '{!! $idDokter !!}'; // id dokter yang sedang di ajak chat
+
+    $(document).ready(function(){ //menampilkan list dokter dan chat nya jika ada
+      list_dokter();
+      if(idDokter == 0) {
+
+      } else {
+        chat(idDokter);  
+      }
+      
+    });
+
+    $('#sendchat').submit(function (e) {
+        e.preventDefault();
+        var request = new FormData(this);
+        var endpoint = '{{ route("user.createchat") }}';
+        $.ajax({
+            url: endpoint,
+            method: "POST",
+            data: request,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                // idDokter = ;  
+
+                $(".loader").css("display", "block");
+            },
+            // dataType: "json",
+            success: function (data) {
+                $('#sendchat')[0].reset(); //reset form chat
+            },
+            error: function (xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                    $.each(error.errors, function (key, value) {
+                        alert(value);
+                    });
+                }
+            }
+        });
+    });
+    
+    function chat(id) { // memunculkan percakapan sesuai user yang terpilih atau terklik
+      idDokter = id;
+      list_dokter();
+      $('#to-dokter-id').val(idDokter);
+      // alert('chat function ' + id);
+        var endpoint = "../../user/percakapan/"+id;
+        // alert(endpoint);
+        token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: endpoint,
+            // method: "POST",
+            contentType: false,
+            cache: false,
+            data : {
+                    '_method' : 'POST',
+                    '_token'  : token
+                  },
+            processData: false,
+            beforeSend: function () {
+                $(".loader").css("display", "block");
+            },
+            success: function (data) {
+                // obj = data[0].chat;
+                // console.log(obj);
+                i = 1;
+                var txt = [];
+                $.each(data, function (key, value) {
+                    if (value.from == 1) { // jika user
+                      if(value.pesan == null) {
+                        var psn = 'silakan mulai chat, Anda belum memiliki percakapan dengan dokter ini';
+                        var wkt = '';
+                      } else {
+                        var psn = value.pesan;
+                        var wkt = value.created_at;
+                      }
+                      txt[i] =' <div class="outgoing_msg"><div class="sent_msg"><p>'+psn+'</p><span class="time_date">'+wkt+' </span></div></div>';
+                    } else { // jika dokter
+                      txt[i] ='<div class="incoming_msg"><div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div><div class="received_msg"><div class="received_withd_msg"><p>'+value.pesan+'</p><span class="time_date"> '+value.created_at+' </span></div></div></div>';
+                    }
+                    
+                    // data = 
+                    // console.log(value.from);
+                    i++;
+                });
+                // $("#nama-user").text(data[0].nama_kontak);
+                $("#chat").html(txt.join([separator = '']));
+                // console.log('' + id);
+                // $(".loader").css("display", "none");
+            },
+            error: function (xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                    $.each(error.errors, function (key, value) {
+                        alert(key, value);
+                    });
+                }
+            }
+        });
+    }
+
+    function list_dokter() { // menampilkan list dokter yang pernah chat
+      var endpoint = "{{route('user.list-dokter')}}";
+      // alert(endpoint);
+      $.ajax({
+        url: endpoint,
+        method: "GET",
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data) {
+          // alert('success');
+          // obj = data[0].chat;
+                // console.log(data);
+                i = 1;
+                var txt = [];
+                $.each(data, function (key, value) {
+                  if(value.dokter_id == idDokter) {
+                    var css = 'active_chat';
+                  } else {
+                    var css = '';
+                  }
+                    txt[i] =
+                    '<a onclick="chat('+value.dokter_id+')"><div class="chat_list '+css+'"><div class="chat_people"><div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div><div class="chat_ib"><h5>'+value.name+' <span class="chat_date">'+value.waktu+'</span></h5></div></div></div></a>';
+                    i++;
+                  });
+                // $("#nama-user").text(data[0].nama_kontak); 
+                $("#list_dokter").html(txt.join([separator = '']));
+                // console.log('' + id);
+                // $(".loader").css("display", "none");
+              },
+              error: function (xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function (key, value) {
+                    alert(key, value);
+                  });
+                }
+              }
+            });
+    }
+
+</script>
 
 
 
-  </html>
+</html>
 
 

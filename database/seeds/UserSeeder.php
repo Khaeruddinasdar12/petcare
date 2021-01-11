@@ -17,5 +17,12 @@ class UserSeeder extends Seeder
 	        'password'  => bcrypt('12345678'),
             'nohp' => '082344949500'
 		]);
+
+        DB::table('users')->insert([
+            'name'  => 'Widya UIN',
+            'email' => 'widya@gmail.com',
+            'password'  => bcrypt('12345678'),
+            'nohp' => '082390009999'
+        ]);
     }
 }

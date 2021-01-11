@@ -8,6 +8,7 @@ use App\User;
 use Auth;
 use App\Chat;
 // use App\Dokter;
+use DB;
 
 use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
@@ -21,28 +22,69 @@ class MessageController extends Controller
 		$this->middleware('auth');
 	}
 
-	public function index($id) 
+
+	public function indexGet()
+	{
+		return view('chat-user.index', ['idDokter' => 0]);
+	}
+
+	public function indexPost(Request $request) 
+	{
+		$auth_id = Auth::user()->id; // user yang sedang login
+		$cek = Chat::where('user_id', $auth_id)->where('dokter_id', $request->idDokter)->count(); // cek jika pernah chat sebelumnya atau belum
+
+		if($cek == 0) {
+			$chat = new Chat; // menginput ke chat
+			$chat->user_id = $auth_id;
+			$chat->dokter_id = $request->idDokter;
+			$chat->from = '1'; // dari user
+			$chat->save();
+		} else {
+			$del = Chat::where('user_id', $auth_id)
+			->where('dokter_id', $request->idDokter)
+			->whereNull('pesan')
+			->delete();
+		}
+
+		
+
+		return view('chat-user.index', ['idDokter' => $request->idDokter]);
+
+	}
+
+	public function percakapan($id)
 	{
 		$auth_id = Auth::user()->id;
 		$chat = Chat::where('user_id', $auth_id)->where('dokter_id', $id)->get();
 
-		// return $chat;
+		return $chat;
+	}
 
-		return view('chat-user.index', ['chat' => $chat]);
+	public function listdokter() //list dokter navside
+	{
+		$auth_id = Auth::user()->id; // user yang sedang login
+
+		//dokter yang pernah chat dengan user
+		$dokter = DB::select(DB::raw("select distinct chats.dokter_id, max(chats.created_at) as waktu, dokters.name from chats join dokters on chats.dokter_id = dokters.id group by chats.dokter_id, dokters.name order by max(chats.created_at) desc, chats.dokter_id"));
+		
+		return $dokter;
 	}
 
 	public function store(Request $request)
 	{
+		$validasi = $this->validate($request, [
+            'pesan'     => 'required|string'
+        ]);
 		$data = new Chat;
 		$data->user_id = Auth::user()->id;
 		$data->dokter_id = $request->dokter_id;
 		$data->pesan = $request->pesan;
-		$data->from = '1';
+		$data->from = '1'; //dari user
 		$data->save();
 
 		$this->broadcast(Auth::user()->name, $request->pesan);
 
-		return redirect()->back();
+		return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil Menambah Data', 'idDokter' => $request->dokter_id );  	
 	}
 
 	private function broadcast($senderName, $message)

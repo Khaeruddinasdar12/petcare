@@ -17,7 +17,7 @@ class CreateChatsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('dokter_id')->unsigned()->nullable();
-            $table->string('pesan');
+            $table->string('pesan')->nullable();
             // $table->enum('status', ['0', '1']); //1 untuk terbaca . . 0 untuk belum
             $table->enum('from', ['0', '1']); //1 untuk user . . 0 untuk dokter
             $table->timestamps();

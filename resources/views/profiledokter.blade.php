@@ -16,7 +16,11 @@
 				{!!$data->keterangan!!}
 			</div>
 			<br>
-			<a href="{{route('user.chat', $data->id)}}" class="btn btn-sm btn-primary" target="_blank"><i class="fa fa-comments"></i> Mulai chat</a>
+			<form action="{{route('user.chat')}}" method="post">
+				@csrf
+				<input type="hidden" name="idDokter" value="{{$data->id}}">
+				<button class="btn btn-sm btn-primary stretched-link position-relative"><i class="fa fa-comments"></i> Mulai chat</button>
+			</form>
 
 		</div><!-- /.blog-main -->
 

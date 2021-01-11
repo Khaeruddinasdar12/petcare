@@ -23,52 +23,57 @@ class MessageController extends Controller
 		$this->middleware('auth:dokter');
 	}
 
-	public function index($id) 
+	public function index() 
 	{
-
-		$auth_id = Auth::guard('dokter')->user()->id; //id dokter sedang login
+		// $auth_id = Auth::guard('dokter')->user()->id; //id dokter sedang login
+		// $name = Auth::guard('dokter')->user()->name;
+		// return $name;
+		return view('dokter.chat');
+		
 
 		//user yang pernah chat dengan dokter
-
-		// $user = Chat::
-		// 		// select('user_id', 'created_at', 'pesan')
-		// 		distinct('user_id')
-		// 		->max('created_at')
-		// 		// ->where('dokter_id', $auth_id)
-		// 		// ->orderBy('created_at', 'desc')
-		// // 		// ->with('user:id,name')
-		// 		->groupBy('user_id')
-		// 		->get();
-		// 		// $filter = $user->latest();
-		// $user = Chat::distinct()->orderBy('created_at', 'desc')->groupBy('user_id')->get();
-		// $user = DB::table('chats')
-		// 	->selectRaw('distinct(chats.user_id), max(chats.created_at), users.name')
-		// 	->join('users', 'users.id', '=', 'chats.user_id')
-		// 	->groupBy('chats.user_id')
-		// 	->orderBy('max(chats.created_at)', 'desc')
-		// 	->get();
-		$user = DB::select(DB::raw("select distinct chats.user_id, max(chats.created_at) as waktu, users.name from chats join users on chats.user_id = users.id group by chats.user_id, users.name order by max(chats.created_at) desc, chats.user_id"));
+		// $user = DB::select(DB::raw("select distinct chats.user_id, max(chats.created_at) as waktu, users.name from chats join users on chats.user_id = users.id group by chats.user_id, users.name where dokter_id = $auth_id order by max(chats.created_at) desc, chats.user_id"));
 		// return $user;
 
 		$chat = Chat::where('user_id', $id)->where('dokter_id', $auth_id)->get();
-
 		// return $chat;
+		return view('dokter.chat', ['chat' => $chat]);
+	}
 
-		return view('dokter.chat', ['chat' => $chat, 'user' => $user]);
+	public function listuser() //list user navside
+	{
+		$auth_id = Auth::guard('dokter')->user()->id; //id dokter sedang login
+
+		//user yang pernah chat dengan user
+		$user = DB::select(DB::raw("select distinct chats.user_id, max(chats.created_at) as waktu, users.name from chats join users on chats.user_id = users.id group by chats.user_id, users.name order by max(chats.created_at) desc, chats.user_id"));
+		
+		return $user;
 	}
 
 	public function store(Request $request)
 	{
+		$validasi = $this->validate($request, [
+            'pesan'     => 'required|string'
+        ]);
 		$data = new Chat;
-		$data->user_id = Auth::user()->id;
-		$data->dokter_id = $request->dokter_id;
+		$data->user_id = $request->user_id;
+		$data->dokter_id = Auth::guard('dokter')->user()->id;
 		$data->pesan = $request->pesan;
-		$data->from = '0'; // dari dokter
+		$data->from = '0'; //dari dokter
 		$data->save();
 
-		$this->broadcast(Auth::user()->name, $request->pesan);
+		$this->broadcast(Auth::guard('dokter')->user()->name, $request->pesan);
 
-		return redirect()->back();
+		return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil Menambah Data', 'idDokter' => $request->user_id );  	
+	}
+
+	public function percakapan($id)
+	{
+		$auth_id = Auth::guard('dokter')->user()->id; //id dokter sedang login
+
+		$chat = Chat::where('user_id', $id)->where('dokter_id', $auth_id)->get();
+
+		return $chat;
 	}
 
 	private function broadcast($senderName, $message)
