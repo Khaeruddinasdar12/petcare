@@ -142,16 +142,6 @@
 
     var idDokter = '{!! $idDokter !!}'; // id dokter yang sedang di ajak chat
 
-    $(document).ready(function(){ //menampilkan list dokter dan chat nya jika ada
-      list_dokter();
-      if(idDokter == 0) {
-
-      } else {
-        chat(idDokter);  
-      }
-      
-    });
-
     $('#sendchat').submit(function (e) {
         e.preventDefault();
         var request = new FormData(this);
@@ -283,6 +273,16 @@
               }
             });
     }
+    
+     $(document).ready(function(){ //menampilkan list dokter dan chat nya jika ada
+      list_dokter();
+      if(idDokter == 0) {
+
+      } else {
+        chat(idDokter);  
+      }
+      
+    });
 
 </script>
 
