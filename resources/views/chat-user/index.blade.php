@@ -1,8 +1,3 @@
-
-
-<!------ Include the above in your HEAD tag ---------->
-
-
 <html>
 <head>
   <title>MyPets | Chat Dokter</title>
@@ -147,8 +142,7 @@
 
     var idDokter = '{!! $idDokter !!}'; // id dokter yang sedang di ajak chat
 
-<<<<<<< HEAD
-=======
+
     $(document).ready(function(){ //menampilkan list dokter dan chat nya jika ada
       list_dokter();
       // alert('halo');
@@ -159,8 +153,7 @@
       }
       
     });
-
->>>>>>> 3625023b16f82e8b203a640ac4eaeb389a1386cb
+    
     $('#sendchat').submit(function (e) {
       e.preventDefault();
       idDokter = $('#to-dokter-id').val();
