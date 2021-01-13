@@ -13,32 +13,34 @@
   <script src="{{asset('chat/js/bootstrap.min.js')}}"></script>
 
   <link rel="stylesheet" type="text/css" href="{{asset('chat/css/style.css')}}">
-  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-messaging.js"></script>
-  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-  <!-- <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script> -->
-
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+  
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-messaging.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+ <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-firestore.js"></script>
+ <!-- <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script> -->
+
+ <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
-    apiKey: "AIzaSyAlMslEpJ8rSkaA8648H0ySkis-668E-P0",
-    authDomain: "chat-b1584.firebaseapp.com",
-    databaseURL: "https://chat-b1584.firebaseio.com",
-    projectId: "chat-b1584",
-    storageBucket: "chat-b1584.appspot.com",
-    messagingSenderId: "375668871045",
-    appId: "1:375668871045:web:f0e8da12520d4d8e84beec",
-    measurementId: "G-5GDV77GLYH"
+    apiKey: "AIzaSyAXMFabSnctaDDAABRSuxPKxIhiTW22qNI",
+    authDomain: "petcare-8fdde.firebaseapp.com",
+    projectId: "petcare-8fdde",
+    storageBucket: "petcare-8fdde.appspot.com",
+    messagingSenderId: "189745989695",
+    appId: "1:189745989695:web:d6841b38fbcd6e8f33508a",
+    measurementId: "G-FBG1DW8XD1"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   // firebase.analytics();
-  // const messaging = firebase.messaging();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -67,9 +69,9 @@
           </div>
           <div class="mesgs">
             <div class="msg_history" id="chat">
-              
-              
-              
+
+
+
             </div>
 
             <div class="type_msg">
@@ -93,7 +95,7 @@
   <script type="text/javascript">
 
     const messaging = firebase.messaging();
-    messaging.usePublicVapidKey("BCC387mwd1QDLxXe5gk7gUOSSR7Me1qbU3ruD2FvY7z3MntJ0nmdYjNmWpl4qEPjgcYfE-rmmRoSLHHj2B982dU");
+    messaging.usePublicVapidKey("BFYb7ygeQK62Rd-QINuJTmf9NF-6QXXi6jnm0sU_YpC_RIDq4X3Y-q7tQHAB5LnGeR0s_naaDafbXuI1veqQmtI");
 
     function sendTokenToServer(token) {
       console.log('token retrieved ', token);
@@ -128,71 +130,90 @@
     });
 
     messaging.onMessage((payload) => { // akan otomatis tereksekusi jika sendchat(id)
+      list_dokter();
+      chat(idDokter);
+
       console.log('Message received. ');
       console.log(payload);
 
-      // alert('hai');
+      console.log('hai user');
+      alert('hai user');
       // location.reload();
-      list_dokter();
-      // alert(idDokter);
-      chat(idDokter);  
+      
+
     });
     
     var idAuth = '{!! Auth::user()->id !!}'; // yang sedang login
 
     var idDokter = '{!! $idDokter !!}'; // id dokter yang sedang di ajak chat
 
+<<<<<<< HEAD
+=======
+    $(document).ready(function(){ //menampilkan list dokter dan chat nya jika ada
+      list_dokter();
+      // alert('halo');
+      if(idDokter == 0) {
+
+      } else {
+        chat(idDokter);  
+      }
+      
+    });
+
+>>>>>>> 3625023b16f82e8b203a640ac4eaeb389a1386cb
     $('#sendchat').submit(function (e) {
-        e.preventDefault();
-        var request = new FormData(this);
-        var endpoint = '{{ route("user.createchat") }}';
-        $.ajax({
-            url: endpoint,
-            method: "POST",
-            data: request,
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function () {
+      e.preventDefault();
+      idDokter = $('#to-dokter-id').val();
+      // list_dokter();
+      var request = new FormData(this);
+      var endpoint = '{{ route("user.createchat") }}';
+      $.ajax({
+        url: endpoint,
+        method: "POST",
+        data: request,
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function () {
                 // idDokter = ;  
 
                 $(".loader").css("display", "block");
-            },
+              },
             // dataType: "json",
             success: function (data) {
                 $('#sendchat')[0].reset(); //reset form chat
-            },
-            error: function (xhr, status, error) {
+              },
+              error: function (xhr, status, error) {
                 var error = xhr.responseJSON;
                 if ($.isEmptyObject(error) == false) {
-                    $.each(error.errors, function (key, value) {
-                        alert(value);
-                    });
+                  $.each(error.errors, function (key, value) {
+                    alert(value);
+                  });
                 }
-            }
-        });
+              }
+            });
     });
     
     function chat(id) { // memunculkan percakapan sesuai user yang terpilih atau terklik
       idDokter = id;
-      list_dokter();
+      // list_dokter();
       $('#to-dokter-id').val(idDokter);
       // alert('chat function ' + id);
-        var endpoint = "../../user/percakapan/"+id;
+      var endpoint = "../../user/percakapan/"+id;
         // alert(endpoint);
         token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            url: endpoint,
+          url: endpoint,
             // method: "POST",
             contentType: false,
             cache: false,
             data : {
-                    '_method' : 'POST',
-                    '_token'  : token
-                  },
+              '_method' : 'POST',
+              '_token'  : token
+            },
             processData: false,
             beforeSend: function () {
-                $(".loader").css("display", "block");
+              $(".loader").css("display", "block");
             },
             success: function (data) {
                 // obj = data[0].chat;
@@ -216,22 +237,22 @@
                     // data = 
                     // console.log(value.from);
                     i++;
-                });
+                  });
                 // $("#nama-user").text(data[0].nama_kontak);
                 $("#chat").html(txt.join([separator = '']));
                 // console.log('' + id);
                 // $(".loader").css("display", "none");
-            },
-            error: function (xhr, status, error) {
+              },
+              error: function (xhr, status, error) {
                 var error = xhr.responseJSON;
                 if ($.isEmptyObject(error) == false) {
-                    $.each(error.errors, function (key, value) {
-                        alert(key, value);
-                    });
+                  $.each(error.errors, function (key, value) {
+                    alert(key, value);
+                  });
                 }
-            }
-        });
-    }
+              }
+            });
+      }
 
     function list_dokter() { // menampilkan list dokter yang pernah chat
       var endpoint = "{{route('user.list-dokter')}}";
@@ -254,10 +275,10 @@
                   } else {
                     var css = '';
                   }
-                    txt[i] =
-                    '<a onclick="chat('+value.dokter_id+')"><div class="chat_list '+css+'"><div class="chat_people"><div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div><div class="chat_ib"><h5>'+value.name+' <span class="chat_date">'+value.waktu+'</span></h5></div></div></div></a>';
-                    i++;
-                  });
+                  txt[i] =
+                  '<a onclick="chat('+value.dokter_id+')"><div class="chat_list '+css+'"><div class="chat_people"><div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div><div class="chat_ib"><h5>'+value.name+' <span class="chat_date">'+value.waktu+'</span></h5></div></div></div></a>';
+                  i++;
+                });
                 // $("#nama-user").text(data[0].nama_kontak); 
                 $("#list_dokter").html(txt.join([separator = '']));
                 // console.log('' + id);
@@ -284,10 +305,10 @@
       
     });
 
-</script>
+  </script>
 
 
 
-</html>
+  </html>
 
 

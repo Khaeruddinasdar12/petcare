@@ -10,14 +10,13 @@ importScripts('https://www.gstatic.com/firebasejs/8.2.2/firebase-messaging.js');
 // your app's Firebase config object.
 // https://firebase.google.com/docs/web/setup#config-object
 var firebaseConfig = {
-	apiKey: "AIzaSyAlMslEpJ8rSkaA8648H0ySkis-668E-P0",
-	authDomain: "chat-b1584.firebaseapp.com",
-	databaseURL: "https://chat-b1584.firebaseio.com",
-	projectId: "chat-b1584",
-	storageBucket: "chat-b1584.appspot.com",
-	messagingSenderId: "375668871045",
-	appId: "1:375668871045:web:f0e8da12520d4d8e84beec",
-	measurementId: "G-5GDV77GLYH"
+  apiKey: "AIzaSyAXMFabSnctaDDAABRSuxPKxIhiTW22qNI",
+  authDomain: "petcare-8fdde.firebaseapp.com",
+  projectId: "petcare-8fdde",
+  storageBucket: "petcare-8fdde.appspot.com",
+  messagingSenderId: "189745989695",
+  appId: "1:189745989695:web:d6841b38fbcd6e8f33508a",
+  measurementId: "G-FBG1DW8XD1"
 };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
@@ -27,17 +26,16 @@ var firebaseConfig = {
 // messages.
 const messaging = firebase.messaging();
 
-
 messaging.onBackgroundMessage(function(payload) {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here
-  const { title, body} = payload.notification;
-  const notificationTitle = 'Ada pesan';
+  const notificationTitle = 'Background Message Title';
   const notificationOptions = {
     body: 'Background Message body.',
     icon: '/firebase-logo.png'
   };
 
-  return self.registration.showNotification(notificationTitle,
+  self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+
