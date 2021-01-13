@@ -29,11 +29,6 @@ class MessageController extends Controller
 		// $name = Auth::guard('dokter')->user()->name;
 		// return $name;
 		return view('dokter.chat');
-		
-
-		//user yang pernah chat dengan dokter
-		// $user = DB::select(DB::raw("select distinct chats.user_id, max(chats.created_at) as waktu, users.name from chats join users on chats.user_id = users.id group by chats.user_id, users.name where dokter_id = $auth_id order by max(chats.created_at) desc, chats.user_id"));
-		// return $user;
 
 		$chat = Chat::where('user_id', $id)->where('dokter_id', $auth_id)->get();
 		// return $chat;
@@ -44,8 +39,8 @@ class MessageController extends Controller
 	{
 		$auth_id = Auth::guard('dokter')->user()->id; //id dokter sedang login
 
-		//user yang pernah chat dengan user
-		$user = DB::select(DB::raw("select distinct chats.user_id, max(chats.created_at) as waktu, users.name from chats join users on chats.user_id = users.id group by chats.user_id, users.name order by max(chats.created_at) desc, chats.user_id"));
+		//user yang pernah chat dengan dokter
+		$user = DB::select(DB::raw("select distinct chats.user_id, max(chats.created_at) as waktu, users.name from chats join users on chats.user_id = users.id where chats.dokter_id = $auth_id group by chats.user_id, users.name  order by max(chats.created_at) desc, chats.user_id"));
 		
 		return $user;
 	}
@@ -62,7 +57,7 @@ class MessageController extends Controller
 		$data->from = '0'; //dari dokter
 		$data->save();
 
-		$this->broadcast(Auth::guard('dokter')->user()->name, $request->pesan);
+		$this->broadcast(Auth::guard('dokter')->user()->name, $request->pesan, $request->user_id);
 
 		return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil Menambah Data', 'idDokter' => $request->user_id );  	
 	}
@@ -76,16 +71,16 @@ class MessageController extends Controller
 		return $chat;
 	}
 
-	private function broadcast($senderName, $message)
+	private function broadcast($senderName, $message, $idUser)
 	{
-		$rute = 
+		// $rute = 
 		$optionBuilder = new OptionsBuilder();
 		$optionBuilder->setTimeToLive(60*20);
 
 		$notificationBuilder = new PayloadNotificationBuilder('Pesan dari :'. $senderName);
 		$notificationBuilder->setBody($message)
 		->setSound('default')
-		->setClickAction('http://localhost:8000/tanya-dokter/1/chat');
+		->setClickAction('http://localhost:8000/tanya-dokter/chat');
 
 		$dataBuilder = new PayloadDataBuilder();
 		$dataBuilder->addData([
@@ -97,8 +92,11 @@ class MessageController extends Controller
 		$notification = $notificationBuilder->build();
 		$data = $dataBuilder->build();
 
-		$token = User::all()->pluck('fcm_token')->toArray();
-		$downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
+		// $token = User::all()->pluck('fcm_token')->toArray();
+		$token = Dokter::all()->pluck('fcm_token')->toArray();
+		$token2 = User::all()->pluck('fcm_token')->toArray();
+		$mergeToken = array_merge($token, $token2);
+		$downstreamResponse = FCM::sendTo($mergeToken, $option, $notification, $data);
 
 		return $downstreamResponse->numberSuccess();;
 	}

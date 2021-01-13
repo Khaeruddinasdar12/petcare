@@ -19,6 +19,7 @@ Auth::routes();
 Route::get('/', 'UnAuth@index')->name('index');
 Route::get('/about', 'UnAuth@about')->name('about');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/nearby', 'NearbyController@nearby')->name('nearby');
 Route::get('/blog', 'UnAuth@blog')->name('blog');
 Route::get('/produk', 'UnAuth@produk')->name('produk');
 Route::get('/produk/{id}', 'UnAuth@produkdetail')->name('produk.detail');

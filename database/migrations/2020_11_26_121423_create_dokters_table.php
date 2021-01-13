@@ -21,6 +21,7 @@ class CreateDoktersTable extends Migration
             $table->string('password');
             $table->text('keterangan');
             $table->enum('status', ['0','1']);
+            $table->text('fcm_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

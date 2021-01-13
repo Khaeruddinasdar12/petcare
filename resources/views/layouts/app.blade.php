@@ -88,6 +88,9 @@
               <a class="nav-link" href="{{route('tanya.dokter')}}">Tanya Dokter</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{route('nearby')}}">Nearby</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
             </li>
             <li class="nav-item">
@@ -177,6 +180,9 @@
               <a class="nav-link" href="{{route('tanya.dokter')}}">Tanya Dokter</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{route('nearby')}}">Nearby</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{route('about')}}">Tentang Kami</a>
             </li>
             <li class="nav-item dropdown">
@@ -197,6 +203,9 @@
             </div>
           </li>
           @elseif($guard == 'dokter')
+          <li class="nav-item">
+              <a class="nav-link" href="{{route('dokter.chat')}}">Tanya Dokter</a>
+            </li>
           <li class="nav-item dropdown">
             <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::guard('dokter')->user()->name }} (Dokter) <span class="caret"></span>
