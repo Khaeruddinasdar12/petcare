@@ -33,17 +33,22 @@ class AppServiceProvider extends ServiceProvider
             if($request->is('admin/login')) {
                 $guard = '';
             }
+            $nav = '#4169E1';
         } else if ($request->is('user/*') || $request->is('home')) {
             $guard = 'user';
+            $nav = '#5F9EA0';
         } else if($request->is('dokter/*') || $request->is('dokter')) {
             $guard = 'dokter';
             if($request->is('dokter/login') || $request->is('dokter/daftar')) {
                 $guard = '';
             }
+            $nav = '#A0522D';
         } else {
             $guard = 'user';
+            $nav = '#5F9EA0';
         }
         // $guard = 'admisn';
         View::share('guard', $guard);
+        View::share('navColor', $nav);
     }
 }

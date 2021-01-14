@@ -22,6 +22,9 @@ class CreatePesanansTable extends Migration
             $table->integer('harga');
             $table->integer('total');
             $table->integer('barang_id');
+            $table->string('service')->nullable();
+            $table->string('kurir');
+            $table->integer('kabupaten_id');
             $table->integer('user_id');
             $table->enum('status', ['0', '1', '2']); // 0 belum, 1 sudah, 2 batal
             $table->string('keterangan')->nullable();

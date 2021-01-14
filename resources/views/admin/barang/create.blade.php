@@ -53,9 +53,18 @@
                     <input type="text" class="form-control" id="inputEmail4" name="harga" value="{{old('harga')}}">
                   </div>
                   <div class="col-md-12 row">
-                    <label for="inputEmail4">Stok</label>
-                    <input type="number" class="form-control" id="inputEmail4" name="stok" value="{{old('stok')}}">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="inputEmail4">Stok</label>
+                        <input type="number" class="form-control" id="inputEmail4" name="stok" value="{{old('stok')}}">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputEmail4">Berat</label>
+                        <input type="number" class="form-control" id="inputEmail4" name="berat" value="{{old('berat')}}">
+                      </div>
+                    </div>
                   </div>
+                  
                 </div>
                 <div class="col-md-6 ">
                   <div class="form-group row col-md-12">

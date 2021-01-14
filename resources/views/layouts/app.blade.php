@@ -59,7 +59,7 @@
 </head>
 <body>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark shadow-sm navbar-laravel" style="background-color:#5F9EA0 !important">
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm navbar-laravel" style="background-color:{{$navColor}} !important">
       <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
           {{ config('app.name', 'Pet Care') }}

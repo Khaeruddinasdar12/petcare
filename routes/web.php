@@ -33,6 +33,11 @@ Route::post('/tanya-dokter/chat', 'User\MessageController@indexPost')->name('use
 
 
 
+//API
+	Route::get('get-all-kabupaten/{id}', 'UnAuth@kabupaten')->name('kabupaten');
+	Route::post('cek-ongkir', 'UnAuth@cekOngkir')->name('cek-ongkir');
+//END API
+
 //RUTE ADMIN 
 Route::get('admin/login', 'Auth\AdminAuthController@getLogin')->name('admin.login');
 Route::post('admin/login', 'Auth\AdminAuthController@postLogin')->name('admin.postlogin');
@@ -63,7 +68,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
 Route::prefix('user')->namespace('User')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('user.dashboard');
-	Route::put('/transaksi/{id}', 'TransaksiProduk@transaksi')->name('user.transaksi'); //membeli
+	Route::post('/transaksi/{id}', 'TransaksiProduk@transaksi')->name('user.transaksi'); //membeli
 
 	Route::put('/pesanan/bukti/{id}', 'PesananController@sendBukti')->name('user.sendbukti');
 	Route::get('/pesanan', 'PesananController@pesanan')->name('user.pesanan');

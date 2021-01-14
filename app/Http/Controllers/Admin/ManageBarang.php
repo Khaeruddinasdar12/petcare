@@ -36,6 +36,7 @@ class ManageBarang extends Controller
             'nama'          => 'required|string',
             'harga'         => 'required|numeric',
             'stok'          => 'required|numeric',
+            'berat'          => 'required|numeric|min:1',
             'keterangan'    => 'required|string',
             'gambar'        => 'mimes:jpeg,png,jpg|max:3072'
         ]);
@@ -43,6 +44,7 @@ class ManageBarang extends Controller
         $data = new Barang;
         $data->nama = $request->nama;
         $data->harga = $request->harga;
+        $data->berat = $request->berat;
 
 
         $gambar = $request->file('gambar');
@@ -76,6 +78,7 @@ class ManageBarang extends Controller
             'nama'          => 'required|string',
             'harga'         => 'required|numeric',
             'stok'          => 'required|numeric',
+            'berat'          => 'required|numeric|min:1',
             'keterangan'    => 'required|string',
             'gambar'        => 'mimes:jpeg,png,jpg|max:3072'
         ]);
@@ -83,7 +86,7 @@ class ManageBarang extends Controller
         $data = Barang::findOrFail($id);
         $data->nama = $request->nama;
         $data->harga = $request->harga;
-
+        $data->berat = $request->berat;
 
         $gambar = $request->file('gambar');
         if ($gambar) {

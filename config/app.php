@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'raja_ongkir_key' => env('RAJA_ONGKIR_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

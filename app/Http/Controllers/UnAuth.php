@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Blog;
 use App\Barang;
+use App\Province;
+use App\City;
+use Illuminate\Support\Facades\Http;
 class UnAuth extends Controller
 {
 	public function index()
@@ -35,8 +38,9 @@ class UnAuth extends Controller
     public function produkdetail($id) //halaman tampilkan detail barang
     {
         $data = Barang::findOrFail($id);
+        $prov = Province::select('id', 'nama')->get();
 
-        return view('produkdetail', ['data' => $data]);
+        return view('produkdetail', ['data' => $data, 'prov' => $prov]);
     }
 
     public function blog(Request $request)
@@ -50,5 +54,38 @@ class UnAuth extends Controller
         }
 
         return view('allblog', ['data' => $data]);
+    }
+
+    public function kabupaten($id)
+    {
+        $kabupaten = City::where('province_id', $id)->get();
+        return $kabupaten;
+    }
+
+    public function cekOngkir(Request $request)
+    {
+        $validasi = $this->validate($request, [
+            'kabupaten'     => 'required',
+            'provinsi'      => 'required',
+            'kurir'         => 'required',
+            // 'berat'         => 'required|numeric'
+        ],[
+            'provinsi.required'  => 'Anda belum memilih provinsi',
+            'kabupaten.required' => 'Anda belum memilih kabupaten',
+            'kurir.required'     => 'Anda belum memilih kurir',
+            // 'berat.required'     => 'Kok bisa beratnya kosong ?',
+        ]);
+
+        $berat = $request->berat * $request->jumlah * 1000;
+        $response = Http::asForm()->withHeaders([
+            'key' => config('app.raja_ongkir_key')
+        ])->post('https://api.rajaongkir.com/starter/cost',[
+            'origin' => 254, //id kota makassar dari table cities
+            'destination' => $request->kabupaten, //id kabupaten tujuan 
+            'weight' => $berat, 
+            'courier' => $request->kurir
+        ]);
+        $data = $response['rajaongkir']['results'][0]['costs'];
+        return $data;
     }
 }

@@ -52,6 +52,7 @@
               <th scope="col">No.</th>
               <th scope="col">Nama</th>
               <th scope="col">Stok</th>
+              <th scope="col">Berat</th>
               <th scope="col">Harga</th>
               <th scope="col">Gambar</th>
               <th scope="col">Action</th>
@@ -70,6 +71,7 @@
             <tr>
               <td scope="row">{{$no++}}</td>
               <td>{{$datas->nama}} </td>
+              <td>{{$datas->berat}} Kg</td>
               <td>{{$datas->stok}}</td>
               <td>Rp. {{format_uang($datas->harga)}}</td>
               <td>
