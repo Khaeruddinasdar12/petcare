@@ -45,6 +45,11 @@ Route::post('admin/logout', 'Auth\AdminAuthController@postLogout')->name('admin.
 
 Route::prefix('admin')->namespace('Admin')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+	Route::get('/profile', 'Profile@index')->name('admin.profile');
+	Route::post('/profile', 'Profile@update')->name('admin.profile');
+
+	Route::get('/manage-user', 'ManageUser@index')->name('manage.user');
+
 	Route::resource('/blog', 'ManageBlog');
 	Route::resource('/barang', 'ManageBarang');
 
@@ -65,9 +70,10 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
 //RUTE USER
 
-
 Route::prefix('user')->namespace('User')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('user.dashboard');
+	Route::get('/profile', 'Profile@index')->name('user.profile');
+	Route::post('/profile', 'Profile@update')->name('user.profile');
 	Route::post('/transaksi/{id}', 'TransaksiProduk@transaksi')->name('user.transaksi'); //membeli
 
 	Route::put('/pesanan/bukti/{id}', 'PesananController@sendBukti')->name('user.sendbukti');

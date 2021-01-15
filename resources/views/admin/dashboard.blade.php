@@ -37,7 +37,7 @@
           <div class="card-body text-secondary">
             <h1>{{$jmluser}}</h1>
             <p class="card-text">user yang terdaftar</p>
-            <a href="#" class="btn btn-outline-secondary btn-sm">lihat semua</a>
+            <a href="{{route('manage.user')}}" class="btn btn-outline-secondary btn-sm">lihat semua</a>
         </div>
     </div>
 </div>
