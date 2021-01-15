@@ -50,6 +50,7 @@
                 <th scope="col">Jumlah</th>
                 <th scope="col">Harga satuan</th>
                 <th scope="col">Total</th>
+                <th scope="col">Kurir</th>
                 <th scope="col">Bukti Transfer</th>
                 <th scope="col">Action</th>
               </tr>
@@ -72,6 +73,7 @@
                 <td>{{$datas->jumlah}}</td>
                 <td>Rp. {{format_uang($datas->harga)}}</td>
                 <td>Rp. {{format_uang($datas->total)}}</td>
+                <td>{{$datas->kurir}} ({{$datas->service}})</td>
                 <td>
                   @if($datas->bukti == '')
                   <p class="text-danger">Belum dikirim</p>

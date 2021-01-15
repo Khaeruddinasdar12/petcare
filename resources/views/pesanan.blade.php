@@ -56,6 +56,7 @@
                 <th scope="col">Jumlah</th>
                 <th scope="col">Harga satuan</th>
                 <th scope="col">Total</th>
+                <th scope="col">Kurir</th>
                 <th scope="col">Bukti Transfer</th>
               </tr>
             </thead>
@@ -77,6 +78,7 @@
                 <td>{{$datas->jumlah}}</td>
                 <td>Rp. {{format_uang($datas->harga)}}</td>
                 <td>Rp. {{format_uang($datas->total)}}</td>
+                <td>{{$datas->kurir}} ({{$datas->service}})</td>
                 <td>
                   @if($datas->bukti == '')
                   <button type="button" data-href="{{route('user.sendbukti', $datas->id)}}" title="Kirim bukti transfer" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#upload"><i class="fa fa-upload"></i> Kirim Bukti</button>

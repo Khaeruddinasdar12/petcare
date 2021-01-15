@@ -16,7 +16,7 @@ class TransaksiProduk extends Controller
 
 	public function transaksi(Request $request, $id)
 	{
-		return $request->all();
+		// return $request->all();
 		$validasi = $this->validate($request, [
             'nama'   => 'required|string',
             'alamat' => 'required|string',

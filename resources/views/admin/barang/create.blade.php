@@ -59,7 +59,7 @@
                         <input type="number" class="form-control" id="inputEmail4" name="stok" value="{{old('stok')}}">
                       </div>
                       <div class="col-md-6">
-                        <label for="inputEmail4">Berat</label>
+                        <label for="inputEmail4">Berat (Kg)</label>
                         <input type="number" class="form-control" id="inputEmail4" name="berat" value="{{old('berat')}}">
                       </div>
                     </div>

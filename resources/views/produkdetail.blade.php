@@ -70,7 +70,7 @@
 						<div class="row col-md-12">	
 							<label>Jumlah : </label>
 							<div class="input-group">		
-								<input type="number" class="form-control" name="jumlah" value="1" min="1" id="jumlah">
+								<input type="number" class="form-control" name="jumlah" value="1" min="1" id="jumlah" onkeyup="jumlah()">
 							</div>
 						</div>
 						<div class="row col-md-12">
@@ -146,6 +146,7 @@
 							<input type="hidden" name="nama" id="nama-post" @guest value="" @else value="{{ Auth::user()->name }}" @endif >
 							<input type="hidden" name="nohp" id="nohp-post" @guest value="" @else value="{{ Auth::user()->nohp }}" @endif >
 							<input type="hidden" name="alamat" id="alamat-post">
+							<input type="hidden" name="jumlah" id="jumlah-post">
 							<input type="hidden" name="service" id="service-post">
 							<input type="hidden" name="total" id="total-post" value="">
 							<input type="hidden" name="kurir" id="kurir-post" value="">
@@ -260,11 +261,13 @@
           $('#paket').append('<div class="card box-shadow"><div class="card-body"><div class="form-check"><input class="form-check-input" type="radio" onchange="code_kurir(this)" name="paket"  value="'+val.cost[0].value+'"><label class="form-check-label" for="exampleRadios1">Rp. '+rupiah(val.cost[0].value)+' '+val.description+ ' ('+val.service+')</label></div></div></div>');
           data_paket[i] = val; 
       });
+        var jumlah = $('#jumlah').val();
         var kurir = $('#kurir').val();
         var kabupaten = $('#kabupaten').val();
         //set form checkout
         $('#kurir-post').val(kurir);
         $('#kabupaten-post').val(kabupaten);
+        $('#jumlah-post').val(jumlah);
         //end set form checkout
         $(".loader").css("display","none");
     },
@@ -336,6 +339,10 @@ function nohp() {
 function alamat() {
 	var alamat = document.getElementById("alamat-send").value;
 	$('#alamat-post').val(alamat);
+}
+function jumlah() {
+	var alamat = document.getElementById("jumlah").value;
+	$('#jumlah-post').val(alamat);
 }
 </script>
 @endsection
